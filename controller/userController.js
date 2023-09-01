@@ -46,12 +46,12 @@ export const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    const loggedUser = await User.findOne({ isLoggedIn: true });
+    const loggedUser = await User.findOne({ isLoggedIn: true,email:email });
     if (loggedUser) {
       res.status(400);
-      throw new Error("Another user already logged in");
+      throw new Error("This  user already logged in another browser");
     }
-    await User.findOneAndUpdate({ _id: user._id }, { isLoggedIn: true });
+    await User.findOneAndUpdate({ _id: user._id,}, { isLoggedIn: true });
     res.status(201).json({
       success: true,
       _id: user._id,

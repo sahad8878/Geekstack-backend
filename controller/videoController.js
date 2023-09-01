@@ -13,10 +13,13 @@ export const getAll = async (req, res) => {
 
 export const uploadData = async (req, res) => {
     const {courseName,description,title}= req.body
+    const videoURL = req.videoURL;
+    console.log(videoURL,"vidoe");
     if(!courseName && !description && ! title){
       res.status(400);
       throw new Error("fill the fields");
     }
+    console.log(req.files.videos,"vidoe");
     let videosPath = []
     if(Array.isArray(req.files.videos) && req.files.videos.length > 0) {
     for(let video of req.files.videos) {
@@ -28,7 +31,7 @@ const createVideo = await Video.create({
     courseName,
     description,
     title,
-    videos:videosPath
+    videos:videoURL
 })
 res.status(201).json({message:"video created successfully",createVideo})
   } catch (error) {
