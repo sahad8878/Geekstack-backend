@@ -68,7 +68,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
 export const logoutUser = async (req, res) => {
   try {
-    console.log(req.query.id,"queryr");
+   
     const uesr = await User.findOneAndUpdate({_id:req.query.id},{isLoggedIn:false})
     res.json({success:true})
     

@@ -1,9 +1,9 @@
 import Video from "../model/videos.js";
 export const getAll = async (req, res) => {
   try {
-    console.log(req.query.courseName);
+   
     const videos = await Video.find({courseName:req.query.courseName});
-    console.log(videos);
+  
     res.status(201).json(videos);
   } catch (error) {
     res.status(400)
@@ -14,12 +14,12 @@ export const getAll = async (req, res) => {
 export const uploadData = async (req, res) => {
     const {courseName,description,title}= req.body
     const videoURL = req.videoURL;
-    console.log(videoURL,"vidoe");
+   
     if(!courseName && !description && ! title){
       res.status(400);
       throw new Error("fill the fields");
     }
-    console.log(req.files.videos,"vidoe");
+  
     let videosPath = []
     if(Array.isArray(req.files.videos) && req.files.videos.length > 0) {
     for(let video of req.files.videos) {
