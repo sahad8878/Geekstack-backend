@@ -3,12 +3,14 @@ const router = express.Router();
 import {
   registerUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  googleLogin
 } from "../controller/userController.js";
 
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+router.post("/googleLogin", googleLogin);
 router.patch("/logout", logoutUser);
 
 
